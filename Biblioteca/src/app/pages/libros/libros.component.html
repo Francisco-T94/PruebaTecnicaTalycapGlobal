@@ -1,0 +1,74 @@
+<body>
+    <header class="container-fluid bg-primary d-flex justify-content-center">
+        <h1 class="text-light mb-0 p-2 fs-5 ">
+            Biblioteca Prueba Tecnica
+        </h1>   
+    </header>
+
+   
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+              <span class="text-primary fs-5 fw-bold">Busqueda</span>
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           
+            <form class="d-flex">
+              <select  name="miselect" class="inputs form-control me-2" placeholder="Autor" [(ngModel)]="autorSeleccionado" (change)="capturar()" >
+                <option [value]="autor.idAutor" *ngFor="let autor of autores">{{autor.nomAutor}}</option>
+              </select>
+
+              <div class="input-group">
+                <input class="form-control me-2" placeholder="Fecha Inicio"
+                    name="dp1"  ngbDatepicker #d1="ngbDatepicker" [(ngModel)]="fechaInicio">
+                <div class="input-group-append"> 
+                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"></button>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <input class="form-control me-2" placeholder="Fecha Fin"
+                    name="dp2"  ngbDatepicker #d2="ngbDatepicker" [(ngModel)]="fechaFin" >
+                <div class="input-group-append"> 
+                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                </div>
+              </div>
+
+              <button class="btn btn-outline-success btm-large" type="submit"  (click)="submit()">Buscar</button>
+            </form>
+
+          </div>
+        </div>
+      </nav>
+
+
+      <div class="container">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre Libro</th>
+              <th>No Paginas</th>
+              <th>Fecha Publicacion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let libro of libros">
+              <td>{{ libro.idLibro }}</td>
+              <td>{{ libro.nomLibro }}</td>
+              <td>{{ libro.cantidadPaginas }}</td>
+              <td>{{ libro.fechaPublicacion  | date:'dd/MM/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div>
+      <button class="btn btn-info" (click)="downloadExcel()">Exportar a Excel</button>
+    </div> 
+
+</body>

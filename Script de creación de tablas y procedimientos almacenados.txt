@@ -1,0 +1,106 @@
+*********************************************************************************************************************
+Scripts de creacion de base de datos
+*********************************************************************************************************************
+create datebase SisReservaTurnos
+use SisReservaTurnos
+
+*********************************************************************************************************************
+Scripts de creacion de tablas e inserccion de datos
+*********************************************************************************************************************
+
+CREATE TABLE autores (
+    id_autor INT PRIMARY KEY IDENTITY (1, 1),
+    nom_autor VARCHAR (240) NOT NULL,
+    ape_autor VARCHAR (240) NOT NULL,
+);
+
+INSERT INTO autores(nom_autor, ape_autor ) 
+VALUES ('Nombre Autor 1', 'Apellido Autor 1'),('Nombre Autor 2', 'Apellido Autor 2'), ('Nombre Autor 3', 'Apellido Autor 3'),('Nombre Autor 4', 'Apellido Autor 4'),('Nombre Autor 5', 'Apellido Autor 5')
+
+CREATE TABLE libros(
+    id_libro INT PRIMARY KEY IDENTITY (1, 1),
+    id_autor INT,
+    nom_libro VARCHAR (240) NOT NULL,
+    cantidad_paginas INT NOT NULL,
+    fecha_publicacion DATETIME NOT NULL,
+    CONSTRAINT fk_autores FOREIGN KEY (id_autor) REFERENCES  autores(id_autor)
+);
+
+INSERT INTO libros(  id_autor , nom_libro, cantidad_paginas, fecha_publicacion) 
+VALUES (1, 'Libro 1', 300, '2021/01/01'),(1, 'Libro 2', 350, '2019/03/04'), (2, 'Libro 3', 4500, '2019/11/07'), (2, 'Libro 4', 640, '2018/03/04'), (3, 'Libro 5', 300, '2020/03/04'),(3, 'Libro 6', 300, '2020/8/17'),(4, 'Libro 7', 250, '2018/07/30'),(4, 'Libro 8', 1500, '2019/03/04'),(5, 'Libro 9', 250, '2021/02/14'),(5, 'Libro 10', 1500,'2019/03/04')
+
+*********************************************************************************************************************
+Scripts de procedimientos almacenados
+*********************************************************************************************************************
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spGetAutorByName
+
+	@nombreAutor1 nvarchar(50),
+	@nombreAutor2 nvarchar(50),
+	@nombreAutor3 nvarchar(50)
+
+AS
+BEGIN
+	SELECT * FROM [BibliotecaDB].[dbo].[autores] AS p
+	WHERE (p.nom_autor= IsNull(@nombreAutor1,@nombreAutor2)) OR (p.nom_autor= IsNull(@nombreAutor1,@nombreAutor3)) 
+	  OR (p.nom_autor= IsNull(@nombreAutor2,@nombreAutor1))  OR (p.nom_autor= IsNull(@nombreAutor2,@nombreAutor3))
+	  OR (p.nom_autor= IsNull(@nombreAutor3,@nombreAutor1))  OR (p.nom_autor= IsNull(@nombreAutor3,@nombreAutor2))
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spGetLibrosByName
+
+	@nombreLibro1 nvarchar(50),
+	@nombreLibro2 nvarchar(50),
+	@nombreLibro3 nvarchar(50)
+
+AS
+BEGIN
+	SELECT * FROM [BibliotecaDB].[dbo].[libros] AS p
+	WHERE (p.nom_libro= IsNull(@nombreLibro1,@nombreLibro2)) OR (p.nom_libro= IsNull(@nombreLibro1,@nombreLibro3)) 
+	  OR (p.nom_libro= IsNull(@nombreLibro2,@nombreLibro1))  OR (p.nom_libro= IsNull(@nombreLibro2,@nombreLibro3))
+	  OR (p.nom_libro= IsNull(@nombreLibro3,@nombreLibro1))  OR (p.nom_libro= IsNull(@nombreLibro3,@nombreLibro2))
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spGetLibrosByRangeDate
+
+	@fechaInicio DATETIME,
+	@fechaFin DATETIME
+
+AS
+BEGIN
+	SELECT * FROM [BibliotecaDB].[dbo].[libros] AS p
+	WHERE p.fecha_publicacion BETWEEN @fechaInicio AND @fechaFin
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE spGetLibrosByIdAutor
+
+	@idAutor DATETIME
+AS
+BEGIN
+	SELECT * FROM [BibliotecaDB].[dbo].[libros] AS p
+	WHERE p.id_autor=@idAutor
+END
+GO

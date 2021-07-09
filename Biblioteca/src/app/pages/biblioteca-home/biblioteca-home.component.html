@@ -1,0 +1,51 @@
+<body >
+    <header class="container-fluid bg-primary d-flex justify-content-center">
+        <h1 class="text-light mb-0 p-2 fs-5 ">
+            Biblioteca Prueba Tecnica
+        </h1>
+        
+    </header>
+
+    <div class="container-fluid " >
+      <ngb-accordion [closeOthers]="true" activeIds="static-1">
+      <ngb-panel id="static-1" title="Descripcion">
+        <ng-template ngbPanelContent>
+         Esto es una prueba tecnica desarrollada por Francisco Tinjaca. Esta desarrollada cumpliendo los lineamientos dados y tecnicamente esta desarrollada 
+         en Angular 10 apartir de framework Bootstrap, tambien se implemente una seria de metodos para exportar el resultado de tablas a archivos de excel. 
+         Por otro lado se desarrollo un API en .netCore 5.0 con base de datos en SQLServer.
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-2">
+        <ng-template ngbPanelTitle>
+          <span>&#9733; <b>Mis perfil y datos de Contacto</b> Francisco T &#9733;</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Capacidad de utilizar los estándares de ingeniería computacionales y multimedia para desarrollar productos innovadores en términos de diseño, interactividad, uso, realismo e inteligencia, como cualidades de la calidad de la experiencia para el usuario final.
+          Habilidades y conocimientos en desarrollo Webn y software en Frontend y Backend. Ingenieria de software, conocimientos avanzados en computación gráfica, Inteligencia Artificial, procesamiento de imágenes y simulación, matemáticas e Ingeniería (Ingeniero en
+          multimedia). Conocimientos avanzados en gestión de proyectos, desarrollo de estrategias en experiencia de usuario, gestión decontenidos para piezas audiovisuales, Trabajo con usuarios y atención al publico.
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-3" title="Datos de contacto" >
+        <ng-template ngbPanelContent>
+          <a href="https://www.linkedin.com/in/luis-francisco-tinjaca-bedoya-71a11219a/" target="_blank"> Link perfil Linkedin </a>
+          <a > / </a>
+          <a href="Francisco_Tinjaca@outlook.com" target="_blank">Francisco_Tinjaca@outlook.com</a>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+      <div class="container-fluid  d-flex justify-content-center margin">
+        <button class="btn btn-primary btn-lg" type="submit" routerLink="/libros">Ir A Biblioteca</button>
+      </div>
+    </div>
+    
+    <footer>
+      <div class=" mb-0 p-2">
+        <a>
+          <span class="fs-2 fw-bold">Esto es una prueba tecnica, desarrollado por Francisco Tinjaca Ingniero desarrollador</span>
+        </a>
+      </div>
+    </footer>
+</body>
+
+

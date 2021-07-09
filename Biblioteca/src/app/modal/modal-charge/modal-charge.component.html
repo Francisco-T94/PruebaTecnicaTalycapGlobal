@@ -1,0 +1,26 @@
+
+<body>
+    <div class="modal-header">
+        <h4> Bienvenido</h4>
+        <button class="close" arial-label="close" type="button" (click)="cerrar()">
+            <span aria-hidden="true" > &times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <h5 *ngIf="barraCarga<100">Los datos se estan sincronizando, espere por favor.</h5>
+        <h5 *ngIf="barraCarga==100">Datos sincronizados exitosamente.</h5>
+        <hr>
+        <div class="progress">
+
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  [ngStyle]="{'width':barraCarga + '%'}"></div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" arial-label="close" type="button" (click)="cerrar()">OK</button>
+    </div>
+</body>
+
+
+
